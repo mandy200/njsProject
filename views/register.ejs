@@ -1,0 +1,26 @@
+<%- include("./headers/header",{title:title,user : user}) %>
+<script src="javascripts/loadingModel.js"></script>
+<div class="container" style="margin-top:30px">
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <p>Please Register to continue</p>
+    <form method="POST">
+        <div>
+            <label></label>
+            <input name="login"/>
+        </div>
+        <div>
+            <label></label>
+            <input name="mail"/>
+        </div>
+        <div>
+            <label></label>
+            <input name="password"/>
+        </div>
+        <div>
+            <label></label>
+            <button type="submit">GO! </button>
+        </div>
+    </form>
+</div>
+<%- include("./headers/footer",{title:"your_title"}) %>

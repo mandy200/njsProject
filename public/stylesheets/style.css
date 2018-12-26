@@ -1,0 +1,63 @@
+.c-color-swatch {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  max-width: 250px;
+}
+.c-color-swatch__item {
+  display: table-cell;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  user-select: none;
+  position: relative;
+  transition: transform 0.25s;
+}
+.c-color-swatch__item:hover {
+  z-index: 1;
+  transform: scale(1.5);
+}
+.c-color-swatch [type="checkbox"]:checked + label:after {
+  content: "\f00c";
+  font-size: 9px;
+  vertical-align: top;
+  color: #fff;
+  font-family: FontAwesome;
+}
+
+
+
+/* Style the search field */
+form.search input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+/* Style the submit button */
+form.search button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+    /* Prevent double borders */
+  cursor: pointer;
+}
+
+form.search button:hover {
+  background: #0b7dda;
+}
+
+/* Clear floats */
+form.search::after {
+  content: "";
+  clear: both;
+  display: table;
+}

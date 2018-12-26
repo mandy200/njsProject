@@ -1,0 +1,16 @@
+<%- include("./headers/header",{title:title,user : user}) %>
+<br>
+<div class="container">
+    <form action="/users/shippingType" method="post">
+        <p>Name of the shipping type* </p>
+        <p><input type="text" id="name" name="name" pattern="(\w\ ){1,25}" required/></p><br>
+        <p>Price of this shipping type* </p>
+        <p><input type="number" step="0.1" id="price" name="price" required/></p><br>
+        <p>* all fields are required</p>
+        <input type="submit" value="OK" class="btn btn-primary">
+    </form>
+</div>
+
+
+
+<%- include("./headers/footer",{title:"your_title"}) %>

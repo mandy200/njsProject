@@ -1,0 +1,14 @@
+<%- include("./headers/header",{title:title,user : user}) %>
+<link rel='stylesheet' href='/stylesheets/style.css' />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<br/>
+<br/>
+<section id="search" class="search-wrap">
+    <h1>Find A Product</h1>
+    <form action="/routes/products.js" class="search-form">
+        <input type="search" name="term" placeholder="Search...">
+        <input type="submit" value="Search">
+    </form>
+</section>
+<%- include("./headers/footer",{title:"your_title"}) %>

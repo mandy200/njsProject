@@ -1,0 +1,264 @@
+<%- include("./headers/header",{title:title,user : user}) %>
+<script src="/javascripts/loadingModel.js"></script>
+<script src="/javascripts/tableManager.js"></script>
+<div class="container" style="margin-top:30px">
+    <div class="row">
+    <!-- Sidebar
+        <div class="sidebar col-xl-3 col-lg-4 order-lg-1">
+            <div class="sidebar-block px-3 px-lg-0 mr-lg-4"><a data-toggle="collapse" href="#categoriesMenu" aria-expanded="false" aria-controls="categoriesMenu" class="d-lg-none block-toggler">Product Categories</a>
+                <div id="categoriesMenu" class="expand-lg collapse">
+                    <div class="nav nav-pills flex-column mt-4 mt-lg-0"> <a href="#" class="nav-link d-flex justify-content-between mb-2 "><span>Jackets</span><span class="sidebar-badge"> 120</span></a>
+                        <div class="nav nav-pills flex-column ml-3"><a href="#" class="nav-link mb-2">Lorem ipsum</a><a href="#" class="nav-link mb-2">Dolor</a><a href="#" class="nav-link mb-2">Sit amet</a><a href="#" class="nav-link mb-2">Donec vitae</a>
+                        </div><a href="#" class="nav-link d-flex justify-content-between mb-2 active"><span>Jeans &amp; chinos</span><span class="sidebar-badge"> 55</span></a>
+                        <div class="nav nav-pills flex-column ml-3"><a href="#" class="nav-link mb-2">Lorem ipsum</a><a href="#" class="nav-link mb-2">Dolor</a><a href="#" class="nav-link mb-2">Sit amet</a><a href="#" class="nav-link mb-2">Donec vitae</a>
+                        </div><a href="#" class="nav-link d-flex justify-content-between mb-2 "><span>Accessories</span><span class="sidebar-badge"> 80</span></a>
+                        <div class="nav nav-pills flex-column ml-3"><a href="#" class="nav-link mb-2">Sit amet</a><a href="#" class="nav-link mb-2">Donec vitae</a><a href="#" class="nav-link mb-2">Lorem ipsum</a><a href="#" class="nav-link mb-2">Dolor</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-block px-3 px-lg-0 mr-lg-4"><a data-toggle="collapse" href="#priceFilterMenu" aria-expanded="false" aria-controls="priceFilterMenu" class="d-lg-none block-toggler">Filter by price</a>
+                <div id="priceFilterMenu" class="expand-lg collapse">
+                    <h6 class="sidebar-heading d-none d-lg-block">Price  </h6>
+                    <div id="slider-snap" class="mt-4 mt-lg-0"> </div>
+                    <div class="nouislider-values">
+                        <div class="min">From $<span id="slider-snap-value-lower"></span></div>
+                        <div class="max">To $<span id="slider-snap-value-upper"></span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-block px-3 px-lg-0 mr-lg-4"><a data-toggle="collapse" href="#brandFilterMenu" aria-expanded="true" aria-controls="brandFilterMenu" class="d-lg-none block-toggler">Filter by brand</a>
+                <!-- Brand filter menu - this menu has .show class, so is expanded by default
+                <div id="brandFilterMenu" class="expand-lg collapse show">
+                    <h6 class="sidebar-heading d-none d-lg-block">Brands </h6>
+                    <form action="#" class="mt-4 mt-lg-0">
+                        <div class="form-group mb-1">
+                            <div class="custom-control custom-checkbox">
+                                <input id="brand0" type="checkbox" name="clothes-brand" checked class="custom-control-input">
+                                <label for="brand0" class="custom-control-label">Calvin Klein <small>(18)</small></label>
+                            </div>
+                        </div>
+                        <div class="form-group mb-1">
+                            <div class="custom-control custom-checkbox">
+                                <input id="brand1" type="checkbox" name="clothes-brand" checked class="custom-control-input">
+                                <label for="brand1" class="custom-control-label">Levi Strauss <small>(30)</small></label>
+                            </div>
+                        </div>
+                        <div class="form-group mb-1">
+                            <div class="custom-control custom-checkbox">
+                                <input id="brand2" type="checkbox" name="clothes-brand" class="custom-control-input">
+                                <label for="brand2" class="custom-control-label">Hugo Boss <small>(120)</small></label>
+                            </div>
+                        </div>
+                        <div class="form-group mb-1">
+                            <div class="custom-control custom-checkbox">
+                                <input id="brand3" type="checkbox" name="clothes-brand" class="custom-control-input">
+                                <label for="brand3" class="custom-control-label">Tomi Hilfiger <small>(70)</small></label>
+                            </div>
+                        </div>
+                        <div class="form-group mb-1">
+                            <div class="custom-control custom-checkbox">
+                                <input id="brand4" type="checkbox" name="clothes-brand" class="custom-control-input">
+                                <label for="brand4" class="custom-control-label">Tom Ford  <small>(110)</small></label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="sidebar-block px-3 px-lg-0 mr-lg-4"> <a data-toggle="collapse" href="#sizeFilterMenu" aria-expanded="false" aria-controls="sizeFilterMenu" class="d-lg-none block-toggler">Filter by size</a>
+                <!-- Size filter menu
+                <div id="sizeFilterMenu" class="expand-lg collapse">
+                    <h6 class="sidebar-heading d-none d-lg-block">Size </h6>
+                    <form action="#" class="mt-4 mt-lg-0">
+                        <div class="form-group mb-1">
+                            <div class="custom-control custom-radio">
+                                <input id="size0" type="radio" name="size" checked class="custom-control-input">
+                                <label for="size0" class="custom-control-label">Small</label>
+                            </div>
+                        </div>
+                        <div class="form-group mb-1">
+                            <div class="custom-control custom-radio">
+                                <input id="size1" type="radio" name="size" class="custom-control-input">
+                                <label for="size1" class="custom-control-label">Medium</label>
+                            </div>
+                        </div>
+                        <div class="form-group mb-1">
+                            <div class="custom-control custom-radio">
+                                <input id="size2" type="radio" name="size" class="custom-control-input">
+                                <label for="size2" class="custom-control-label">Large</label>
+                            </div>
+                        </div>
+                        <div class="form-group mb-1">
+                            <div class="custom-control custom-radio">
+                                <input id="size3" type="radio" name="size" class="custom-control-input">
+                                <label for="size3" class="custom-control-label">X-Large</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="sidebar-block px-3 px-lg-0 mr-lg-4"><a data-toggle="collapse" href="#colourFilterMenu" aria-expanded="false" aria-controls="colourFilterMenu" class="d-lg-none block-toggler">Filter by colour</a>
+                <!-- Size filter menu
+                <div id="colourFilterMenu" class="expand-lg collapse">
+                    <h6 class="sidebar-heading d-none d-lg-block">Colour </h6>
+                    <div class="mt-4 mt-lg-0">
+                        <ul class="list-inline mb-0 colours-wrapper">
+                            <li class="list-inline-item">
+                                <label for="colour_sidebar_Blue" style="background-color: #668cb9" data-allow-multiple class="btn-colour"> </label>
+                                <input type="checkbox" name="colour" value="value_sidebar_Blue" id="colour_sidebar_Blue" class="input-invisible">
+                            </li>
+                            <li class="list-inline-item">
+                                <label for="colour_sidebar_White" style="background-color: #fff" data-allow-multiple class="btn-colour"> </label>
+                                <input type="checkbox" name="colour" value="value_sidebar_White" id="colour_sidebar_White" class="input-invisible">
+                            </li>
+                            <li class="list-inline-item">
+                                <label for="colour_sidebar_Violet" style="background-color: #8b6ea4" data-allow-multiple class="btn-colour"> </label>
+                                <input type="checkbox" name="colour" value="value_sidebar_Violet" id="colour_sidebar_Violet" class="input-invisible">
+                            </li>
+                            <li class="list-inline-item">
+                                <label for="colour_sidebar_Red" style="background-color: #dd6265" data-allow-multiple class="btn-colour"> </label>
+                                <input type="checkbox" name="colour" value="value_sidebar_Red" id="colour_sidebar_Red" class="input-invisible">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Sidebar end-->
+        <div class="products-grid col-xl-9 col-lg-8 order-lg-2">
+            <h1><%= title %></h1>
+            <div class="row">
+                <div class="col-sm-4 card">
+                <!--
+                <form method="post" action="/users/products">
+                    <table>
+
+                        <tr>
+                            <th>n°</th>
+                            <th>Name</th>
+                            <th>Desc</th>
+                            <th>IMG</th>
+                        </tr>
+                        <tr id="lastline">
+                            <td>1</td>
+                            <td><input class="form-control" id="name" type="text" name="name"/></td>
+                            <td><input class="form-control" id="desc" type="text" name="desc"/></td>
+                            <td><input class="form-control" id="img" type="text" name="img"/></td>
+                        </tr>
+
+                    </table>-->
+                    <form method="post" action="/products/products">
+                        <div class="form-group>">
+                            <div  class="form-group">
+                                <label for="name">Name :</label>
+                                <input class="form-control" id="name" type="text" name="name" required/>
+                            </div>
+                            <div  class="form-group">
+                                <label for="desc">Desc :</label>
+                                <input class="form-control" id="desc" type="text" name="desc" required/>
+                            </div>
+                            <div  class="form-group">
+                                <label for="img">IMG :</label>
+                                <input class="form-control" id="img" type="text" name="img" pattern="https?://.+" required/>
+                            </div>
+                            <div  class="form-group">
+                                <label for="price">Price :</label>
+                                <input class="form-control" id="price" type="text" name="price" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="category">Category :</label>
+                                <select class="form-control" id="category" name="category" required>
+                                    <% for(row of categoryProduct) {%>
+                                    <option value="<%=row.id%>"><%=row.name%></option>
+                                    <%}%>
+                                </select>
+                            </div>
+                            <div  class="form-group">
+                                <label for="barcode">barcode :</label>
+                                <input class="form-control" id="barcode" type="text" name="barcode" pattern="[0-9]{13}" required/>
+                            </div>
+                            <div  class="form-group">
+                                <label for="brand">Brand :</label>
+                                <input class="form-control" id="brand" type="text" name="brand" required/>
+                            </div>
+                            <div  class="form-group">
+                                <label for="colour">Colour :</label>
+                                <div class="c-color-swatch">
+                                    <input type="checkbox" name="colors[]" id="color-F9ED69" hidden/>
+                                    <label class="c-color-swatch__item" for="color-F9ED69" style="background: #F9ED69"></label>
+
+                                    <input type="checkbox" name="colors[]" value="F08A5D" id="color-F08A5D" hidden/>
+                                    <label class="c-color-swatch__item" for="color-F08A5D" style="background: #F08A5D"></label>
+
+                                    <input type="checkbox" name="colors[]" value="B83B5E" id="color-B83B5E" hidden/>
+                                    <label class="c-color-swatch__item" for="color-B83B5E" style="background: #B83B5E"></label>
+
+                                    <input type="checkbox" name="colors[]" value="6A2C70" id="color-6A2C70" hidden/>
+                                    <label class="c-color-swatch__item" for="color-6A2C70" style="background: #6A2C70"></label>
+
+                                    <input type="checkbox" name="colors[]" value="2B3964" id="color-2B3964" hidden/>
+                                    <label class="c-color-swatch__item" for="color-2B3964" style="background: #2B3964"></label>
+
+                                    <input type="checkbox" name="colors[]" value="3482AA" id="color-3482AA" hidden/>
+                                    <label class="c-color-swatch__item" for="color-3482AA" style="background: #3482AA"></label>
+
+                                    <input type="checkbox" name="colors[]" value="6DB3B5" id="color-6DB3B5" hidden/>
+                                    <label class="c-color-swatch__item" for="color-6DB3B5" style="background: #6DB3B5"></label>
+
+                                    <input type="checkbox" name="colors[]" value="477D7F" id="color-477D7F" hidden/>
+                                    <label class="c-color-swatch__item" for="color-477D7F" style="background: #477D7F"></label>
+
+                                    <input type="checkbox" name="colors[]" value="1F5357" id="color-1F5357" hidden/>
+                                    <label class="c-color-swatch__item" for="color-1F5357" style="background: #1F5357"></label>
+
+                                    <input type="checkbox" name="colors[]" value="64BD97" id="color-64BD97" hidden/>
+                                    <label class="c-color-swatch__item" for="color-64BD97" style="background: #64BD97"></label>
+                                </div>
+                            </div>
+                            <div  class="form-group">
+                                <label for="weight">weight :</label>
+                                <input class="form-control" id="weight" type="number" step="0.01" name="weight" required/>
+                            </div>
+                            <div  class="form-group">
+                                <label for="height">height :</label>
+                                <input class="form-control" id="height" type="number" step="0.01" name="height" required/>
+                            </div>
+                            <div  class="form-group">
+                                <label for="width">width :</label>
+                                <input class="form-control" id="width" type="number" step="0.01" name="width" required/>
+                            </div>
+                            <div  class="form-group">
+                                <label for="depth">depth :</label>
+                                <input class="form-control" id="depth" type="number" step="0.01" name="depth" required/>
+                            </div>
+                        </div>
+                        <!--<div class="form-group>">
+                            <div  class="form-group">
+                                <label for="name">Name :</label>
+                                <input class="form-control" id="name" type="text" name="name"/>
+                            </div>
+                            <div  class="form-group">
+                                <label for="desc">Desc :</label>
+                                <input class="form-control" id="desc" type="text" name="desc"/>
+                            </div>
+                            <div  class="form-group">
+                                <label for="img">IMG :</label>
+                                <input class="form-control" id="img" type="text" name="img"/>
+                            </div>
+                        </div>-->
+                        <input type="submit" class="btn btn-primary">
+                    </form>
+                </div>
+                <div class="col-sm-8 card">
+                    <div id="realList">
+                        <%-products%>
+                    </div>
+                    <!--<form id="loadMore" action="">
+                        <input id="m" autocomplete="off" value="3" style="visibility: hidden"/><button>LoadMore</button>
+                    </form>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include("./headers/footer",{title:"your_title"}) %>
