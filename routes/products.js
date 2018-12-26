@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
     res.send('respond with a resource');
 });
 
-/* search product*/
+/* MODIFY HERE : search product*/
 router.get('/search', function (req, res, next) {
     let { term } = req.query;
 
