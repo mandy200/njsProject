@@ -85,7 +85,9 @@ module.exports = (sequelize, DataTypes, Product) => {
             callback(true, {error: "id is undefined"});
         }
     };
-
+    
+    
+/* EDIT HERE : Product Search */
     productModel.searchBrand = async  function (value, callback) {
         if (value !== 'undefined'){
             this.findAll({
