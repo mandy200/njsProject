@@ -4,11 +4,426 @@
 
 <br/>
 <br/>
-<section id="search" class="search-wrap">
-    <h1>Find A Product</h1>
-    <form action="/routes/products.js" class="search-form">
-        <input type="search" name="term" placeholder="Search...">
-        <input type="submit" value="Search">
-    </form>
-</section>
+<!-- action="/products/searchby" -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3">
+            <form action="">
+                <h1>Find A Product</h1>
+                <div class="form-group">
+                    <input type="search" class="form-control" id="term" name="term" placeholder="Search...">
+                </div>
+                <div class="form-group">
+                    <select class="form-control" onchange="searchByPrFN()" id="maxPriceOpt" name="maxPrice">
+                        <option value="">Maximum Price</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                        <option value="500">500</option>
+                        <option value="1000">1000</option>
+                        <option value="More-Than-1000">More-Than-1000</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+
+                    <select class="form-control" onchange="searchByCat()" id="categoryType">
+                        <option value="">Category</option>
+                        <option value="1">Cat1</option>
+                        <option value="2">Cat2</option>
+                        <option value="3">Cat3</option>
+                        <option value="4">Cat4</option>
+                        <option value="5">Cat5</option>
+                    </select>
+                </div>
+                <div id="brandDataDiv" class="form-group">
+
+                </div>
+
+                <div class="c-color-swatch">
+                    <input type="checkbox" name="colors[]" value="Black" id="color-Black" onchange="getColor(event)" hidden/>
+                    <label class="c-color-swatch__item" for="color-Black" style="background: Black"></label>
+
+                    <input type="checkbox" name="colors[]" value="Brown" id="color-Brown" onchange="getColor(event)" hidden/>
+                    <label class="c-color-swatch__item" for="color-Brown" style="background: Brown"></label>
+
+                    <input type="checkbox" name="colors[]" value="Blue" id="color-Blue" onchange="getColor(event)" hidden/>
+                    <label class="c-color-swatch__item" for="color-Blue" style="background: Blue"></label>
+
+                    <input type="checkbox" name="colors[]" value="Green" id="color-Green" onchange="getColor(event)" hidden/>
+                    <label class="c-color-swatch__item" for="color-Green" style="background: Green"></label>
+
+                    <input type="checkbox" name="colors[]" value="Gold" id="color-Gold" onchange="getColor(event)" hidden/>
+                    <label class="c-color-swatch__item" for="color-Gold" style="background: Gold"></label>
+
+                    <input type="checkbox" name="colors[]" value="Orange" id="color-Orange" onchange="getColor(event)" hidden/>
+                    <label class="c-color-swatch__item" for="color-Orange" style="background: Orange"></label>
+
+                    <input type="checkbox" name="colors[]" value="Red" id="color-Red" onchange="getColor(event)" hidden/>
+                    <label class="c-color-swatch__item" for="color-Red" style="background: Red"></label>
+
+                    <input type="checkbox" name="colors[]" value="Purple" id="color-Purple" onchange="getColor(event)" hidden/>
+                    <label class="c-color-swatch__item" for="color-Purple" style="background: Purple"></label>
+
+                    <input type="checkbox" name="colors[]" value="Orchid" id="color-Orchid" onchange="getColor(event)" hidden/>
+                    <label class="c-color-swatch__item" for="color-Orchid" style="background: Orchid"></label>
+
+                    <input type="checkbox" name="colors[]" value="Gray" id="color-Gray" onchange="getColor(event)" hidden/>
+                    <label class="c-color-swatch__item" for="color-Gray" style="background: Gray"></label>
+
+                    <input type="checkbox" name="colors[]" value="White" id="color-White" onchange="getColor(event)" hidden/>
+                    <label class="c-color-swatch__item" for="color-White" style="background: White"></label>
+                </div>
+
+                <!-- </div> -->
+
+                <input type="button" style="margin-top:10px" class="btn btn-primary" onclick="findCheck()" value="Search">
+                <button type="reset" style="margin-top:10px" onclick="removeTable()" class="btn btn-primary FloatButton">Reset All</button>
+
+            </form>
+            <!-- </section> -->
+        </div>
+        <div class="col-9" style="margin-top:55px">
+            <div class="table-responsive" id="table" style="padding-bottom:20px"></div>
+
+        </div>
+    </div>
+
+
+</div>
 <%- include("./headers/footer",{title:"your_title"}) %>
+<script>
+
+    // search by Category
+    function searchByCat() {
+        if (categoryType.value) {
+            searchByCatFN(categoryType.value)
+        }
+        else {
+            alert("Please Select Category Value")
+        }
+    }
+    // search by minPrice
+    function searchByMinPr() {
+        if (minPriceOpt.value) {
+            searchByMinFN(minPriceOpt.value)
+        }
+        else {
+            alert("Please Select Min-Price Value")
+        }
+    }
+    // search by maxPrice
+    function searchByPrFN() {
+        if (maxPriceOpt.value) {
+            searchByPrApi(maxPriceOpt.value)
+        }
+        else {
+            alert("Please Select Max-Price Value")
+        }
+    }
+    function getColor(event) {
+        if (event.target.checked) {
+            searchByColor(event.target.value)
+        }
+    }
+
+    //Check for value enterred
+    function findCheck() {
+        if (term.value) {
+            searchByName(term.value)
+        }
+        else {
+            alert("Please Enter Value in Search Field")
+        }
+    }
+    function searchByCatFN(cate) {
+        fetch(`/products/searchCat/${cate}`, {
+            method: "GET",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(result => {
+                displaySearchData(result)
+            })
+            .catch(error => {
+                console.log("Something went worng ! No Data available !", error);
+            });
+    }
+    function searchByMinFN(minPr) {
+        fetch(`/products/searchMinPr/${minPr}`, {
+            method: "GET",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(result => {
+                displaySearchData(result)
+            })
+            .catch(error => {
+                console.log("Something went worng ! No Data available !", error);
+            });
+    }
+    function searchByPrApi(maxPr) {
+        fetch(`/products/searchByPr/${maxPr}`, {
+            method: "GET",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(result => {
+                displaySearchData(result)
+            })
+            .catch(error => {
+                console.log("Something went worng ! No Data available !", error);
+            });
+    }
+    function searchByName(name) {
+        fetch(`/products/searchByName/${name}`, {
+            method: "GET",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(result => {
+                displaySearchData(result)
+            })
+            .catch(error => {
+                console.log("Something went worng ! No Data available !", error);
+            });
+    }
+    function searchByBrand(brand) {
+        fetch(`/products/searchBrand/${brand}`, {
+            method: "GET",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(result => {
+                displaySearchData(result)
+            })
+            .catch(error => {
+                console.log("Something went worng ! No Data available !", error);
+            });
+    }
+    function searchByColor(color) {
+
+        fetch(`/products/searchColour/${color}`, {
+            method: "GET",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(result => {
+
+                displaySearchData(result)
+            })
+            .catch(error => {
+                console.log("Something went worng ! No Data available !", error);
+            });
+    }
+
+    function displaySearchData(data) {
+
+        if (data.length > 0) {
+            var parent = document.getElementById('table');
+            if (parent.children.length > 0) {
+                var childTable = document.getElementById('dispalyDataNode');
+                parent.removeChild(childTable)
+            }
+            var table = document.createElement("table");
+            table.id = 'dispalyDataNode';
+            table.className = 'table table-bordered';
+
+            var thead = document.createElement("thead");
+            var thr = document.createElement('tr');
+            var th2 = document.createElement('th')
+            th2.innerText = "Name";
+            var th3 = document.createElement('th')
+            th3.innerText = "Description";
+            var th4 = document.createElement('th')
+            th4.innerText = "Barcode";
+            var th5 = document.createElement('th')
+            th5.innerText = "Brand";
+            var th6 = document.createElement('th')
+            th6.innerText = "CategoryProductId";
+            var th7 = document.createElement('th')
+            th7.innerText = "Colour";
+            var th9 = document.createElement('th')
+            th9.innerText = "Hight";
+            var th10 = document.createElement('th')
+            th10.innerText = "Width";
+            var th11 = document.createElement('th')
+            th11.innerText = "Depth";
+            var th12 = document.createElement('th')
+            th12.innerText = "Weight";
+            var th13 = document.createElement('th')
+            th13.innerText = "Img";
+            var th14 = document.createElement('th')
+            th14.innerText = "Price";
+
+            thr.appendChild(th2);
+            thr.appendChild(th3);
+            thr.appendChild(th4);
+            thr.appendChild(th5);
+            thr.appendChild(th6);
+            thr.appendChild(th7);
+            thr.appendChild(th9);
+            thr.appendChild(th10);
+            thr.appendChild(th11);
+            thr.appendChild(th12);
+            thr.appendChild(th13);
+            thr.appendChild(th14);
+            thead.appendChild(thr);
+            table.appendChild(thead)
+
+            var tbody = document.createElement('tbody');
+
+            data.forEach(function (oneFollower) {
+                var tr = document.createElement('tr');
+                var td2 = document.createElement('td');
+                var td3 = document.createElement('td');
+                var td4 = document.createElement('td');
+                var td5 = document.createElement('td');
+                var td6 = document.createElement('td');
+                var td7 = document.createElement('td');
+                var td9 = document.createElement('td');
+                var td10 = document.createElement('td');
+                var td11 = document.createElement('td');
+                var td12 = document.createElement('td');
+                var td13 = document.createElement('td');
+                var td14 = document.createElement('td');
+                td2.innerText = oneFollower.Name;
+                td3.innerText = oneFollower.Description;
+                td4.innerText = oneFollower.barcode;
+                td5.innerText = oneFollower.brand;
+                td6.innerText = oneFollower.categoryProductId;
+                td7.innerText = oneFollower.colour;
+                td9.innerText = oneFollower.height;
+                td10.innerText = oneFollower.width;
+                td11.innerText = oneFollower.depth;
+                td12.innerText = oneFollower.weight;
+                td13.innerText = oneFollower.img;
+                td14.innerText = oneFollower.price;
+                tr.appendChild(td2);
+                tr.appendChild(td3);
+                tr.appendChild(td4);
+                tr.appendChild(td5);
+                tr.appendChild(td6);
+                tr.appendChild(td7);
+                tr.appendChild(td9);
+                tr.appendChild(td10);
+                tr.appendChild(td11);
+                tr.appendChild(td12);
+                tr.appendChild(td13);
+                tr.appendChild(td14);
+                tbody.appendChild(tr);
+                table.appendChild(tbody)
+                document.getElementById('table').appendChild(table)
+            })
+        } else {
+            var parent = document.getElementById('table');
+            if (parent.children.length > 0) {
+                var childTable = document.getElementById('dispalyDataNode');
+                parent.removeChild(childTable)
+            }
+            var h1 = document.createElement('h1');
+            h1.innerText = 'No Record Found';
+            h1.id = 'dispalyDataNode';
+            document.getElementById('table').appendChild(h1)
+
+        }
+    }
+
+    function ShowBrandFN(brandData) {
+        var select = document.createElement("select");
+        select.id = "selectBranID";
+        select.onchange = (event) => searchByBrand(event.target.value);
+        var selectName = document.createElement('option')
+        selectName.innerText = "Brand";
+        select.appendChild(selectName)
+        select.className = "form-control"
+        brandData.forEach((data) => {
+            var option = document.createElement('option')
+            option.value = data;
+            option.innerText = data;
+            select.appendChild(option);
+        })
+
+
+        var brandDiv = document.getElementById('brandDataDiv')
+        brandDiv.appendChild(select);
+    }
+    window.onload = function () {
+        fetch(`/products/searchAllBrands`, {
+            method: "GET",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(result => {
+                ShowBrandFN(eliminateDuplicates(result));
+
+            })
+            .catch(error => {
+                console.log("Something went worng ! No Data available !", error);
+            });
+
+    }
+    function removeTable() {
+        var parent = document.getElementById('table')
+        if (parent && parent.children.length > 0) {
+            var child = document.getElementById('dispalyDataNode')
+            parent.removeChild(child)
+        }
+
+    }
+
+
+    function eliminateDuplicates(arr) {
+        var i,
+            len = arr.length,
+            out = [],
+            obj = {};
+
+        for (i = 0; i < len; i++) {
+            obj[arr[i].brand] = 0;
+        }
+        for (i in obj) {
+            out.push(i);
+        }
+        return out;
+    }
+
+</script>

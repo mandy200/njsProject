@@ -1,8 +1,8 @@
 <%- include("./headers/header",{title:title,user : user}) %>
 <div class="container">
-<% if(product==null) { %>
-    Sorry No Product Found
-<%}else%>
+    <% if(product==null) { %>
+        Sorry No Product Found
+    <%}else%>
     <%=product%>
 </div>
 <%- include("./headers/footer",{title:"your_title"}) %>

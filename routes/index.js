@@ -6,7 +6,7 @@ var router = express.Router();
 /* GET home page. */
 
 router.get('/' , function(req,res,next) {
-    res.send('Matthieu supprimme ton ajout Pierre et lois');
+    res.send('There is nothing to see here');
     //res.render('index', {title: 'PhyGIT Accueil',user:{}});
 });
 router.get('/register', function(req,res,next) {

@@ -1,0 +1,17 @@
+<%- include("./headers/header",{title:title,user : user}) %>
+<br>
+<div class="container">
+    <form action="/shippingType/search" method="post">
+        <p>Name of the shipping type* </p>
+        <p><input type="text" id="name" name="name" pattern="(\w\ ){1,25}" required/></p><br>
+
+        <input type="submit" value="OK" class="btn btn-primary">
+    </form>
+    <% if(result) {%>
+    <%=result%>
+    <% }%>
+</div>
+
+
+
+<%- include("./headers/footer",{title:"your_title"}) %>

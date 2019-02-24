@@ -7,7 +7,7 @@
     <link rel='stylesheet' href="/stylesheets/style.default.css">
     <link rel="stylesheet" href="/stylesheets/bootstrap.min.css" >
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="/javascripts/bootstrap.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
@@ -33,9 +33,10 @@
                     Menu
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/users/products">Products</a>
-                    <a class="dropdown-item" href="/users/shippingType">Shipping type</a>
-                    <a class="dropdown-item" href="/users/customers">Customers</a>
+                    <a class="dropdown-item" href="/products/search">Search Products</a>
+                    <a class="dropdown-item" href="/shippingType/search">Shipping type</a>
+                    <a class="dropdown-item" href="/customers/search">Customers</a>
+                    <a class="dropdown-item" href="/shops/search">Shops</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -57,9 +58,9 @@
                 <a class="nav-link disabled" href="#">Disabled</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
+        <!--<form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search by product name or brand" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        </form>-->
     </div>
 </nav>

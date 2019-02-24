@@ -16,4 +16,3 @@ socketListener.prototype.connection = new function(io) {
         });
     });
 };
-module.exports = socketListener;

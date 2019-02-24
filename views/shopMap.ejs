@@ -1,0 +1,21 @@
+<%- include("./headers/header",{title:title,user : user}) %>
+<div class="container-fluid" style="margin-top:30px">
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.min.js"></script>-->
+    <script src="/javascripts/THREE/three.js"></script>
+    <script src="/javascripts/THREE/js/libs/dat.gui.min.js"></script>
+    <!--<script src="/javascripts/THREE/js/libs/tween.min.js"></script>-->
+    <script src="/javascripts/THREE/js/controls/OrbitControls.js"></script>
+    <script src="/javascripts/THREE/js/WebGL.js"></script>
+    <div class="container-fluid">
+        <div class="row" >
+            <div class="col col-lg-3 row" id="shops"></div>
+            <div id="container" class="col col-lg-9" style="height:500px"></div>
+        </div>
+    </div>
+    <div oncontextmenu="return false;">
+        <script src="/javascripts/MapManager/MapControler.js"></script>
+        <script src="/javascripts/MapManager/MapLoading.js"></script>
+    </div>
+</div>
+
+<%- include("./headers/footer",{title:"your_title"}) %>

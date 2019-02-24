@@ -1,18 +1,30 @@
 <%- include("./headers/header",{title:title,user : user}) %>
 <script src="/javascripts/loadingModel.js"></script>
 <script src="/javascripts/tableManager.js"></script>
-
 <div class="container" style="margin-top:30px">
-    <form action="/shops/search" method="post">
-        <p>Id of the shop </p>
-        <p><input type="number" id="id" name="id" min="1" step="1" pattern="(\w\ ){1,25}" /></p><br>
-        <p>Name of the shop </p>
-        <p><input type="text" id="name" name="name" pattern="(\w\ ){1,25}" /></p><br>
-        <p>Places of the shop (up to 150) </p>
-        <p><input type="number" min="1" max="150" step="1" id="Places" name="Places" /></p><br>
-        <p>Rent for the shop (€)</p>
-        <p><input type="number" min="1" id="Rent" name="Rent" pattern="(\w\ ){1,25}" /></p><br>
-        <input type="submit" value="Search" class="btn btn-primary">
-    </form>
+    <div class="row">
+        <div class="shops-grid col-xl-9 col-lg-8 order-lg-2">
+            <h1><%= title %></h1>
+            <div class="row">
+                <div class="col-sm-4 card">
+                    <form method="post" action="/shops/search">
+                        <div class="form-group>">
+                            <div  class="form-group">
+                                <label for="search">Search :</label>
+                                <input class="form-control" id="Search" type="text" name="search" placeholder="Search by Name" required/>
+                            </div>
+                        </div>
+                        <input type="submit" value="Search" class="btn btn-primary">
+                    </form>
+                </div>
+                <div class="col-sm-8 card">
+                    <div id="realList">
+
+                        <%-shop%>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <%- include("./headers/footer",{title:"your_title"}) %>
