@@ -1,35 +1,39 @@
 var util = require("util");
-var sequelize = require('../utils/database.js');
-var Sequelize = require('sequelize');
 
 class Customer {
-    constructor(firstName,lastName,address,email,phone,login,password,newsletter)
+    constructor(firstName,lastName,birthday,age,gender,address,email,phone,login,password,newsletter,position, profile, totalOrder)
     {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.birthday = birthday;
+        this.age = age;
+        this.gender = gender;
         this.address = address;
         this.email = email;
         this.phone = phone;
         this.login = login;
         this.password = password;
         this.newsletter = newsletter;
+        this.position = position;
+        this.profile = profile;
+        this.totalOrder = totalOrder;
+        //this.template = "<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><tr>"
+
     }
 
-    /*
+
+
+
     getCustomerView()
     {
-        return util.format(this.template,this.firstname,this.lastname,this.email,this.phone);
-        this.login = login;
-        this.password = password;
-        this.newsletter = newsletter;
-    }
-    */
-    getCustomerView()
-    {
-        return util.format(this.firstName,this.lastName,this.address,this.email,this.phone,this.login,this.password,this.newsletter);
+        this.age =  this.calculateAge();
+        console.log(this.age);
+        var s=util.format(this.firstName, this.lastName,this.birthday, this.calculateAge(), this.gender,this.address,this.email,this.phone,this.login,this.password,this.newsletter,this.position, this.profile, this.totalOrder);
+        return s;
     };
 
-    checkCustomer(newCustomer)
+
+    static check(newCustomer)
     {
         var pattern = new RegExp(/[~`!#$%\^&@*+=\-\[\]\\;,/{}|\\":<>\?]/);
         var message = "";
@@ -45,10 +49,20 @@ class Customer {
         if (pattern.test(newCustomer.address)){
             message += "error with address | ";
         }
-        if (newCustomer.email.indexOf("@") == - 1){
+        if (newCustomer.email.indexOf('@') === - 1){
             message += "error with email address";
         }
         return message;
     };
+    static checkingSearch(value){
+        var pattern = new RegExp(/[!*#$%^&()/\~+-,.?":{}|<>]/);
+
+        if (value === '' || !pattern.test(value)){
+            return true;
+        }else{
+            return false;
+        }
+    };
+
 }
 module.exports = Customer;

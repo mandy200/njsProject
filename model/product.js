@@ -23,9 +23,9 @@ class Product {
         this.template = "<div class=\"col-xl-4 col-sm-6\">\n" +
             "              <div class=\"product\">\n" +
             "                <div class=    \"product-image\"><img src=\"%s\" alt=\"product\" class=\"img-fluid\"/>\n" +
-            "                  <div class=\"product-hover-overlay\"><a href=\"detail.html\" class=\"product-hover-overlay-link\"></a>\n" +
+            "                  <div class=\"product-hover-overlay\"><a href='/products/detail' class=\"product-hover-overlay-link\"></a>\n" +
             "                    <div class=\"product-hover-overlay-buttons\"><a href=\"#\" class=\"btn btn-outline-dark btn-product-left\">\n" +
-            "<i class=\"fa fa-shopping-cart\"></i></a><a href=\"detail.html\" class=\"btn btn-dark btn-buy\">\n" +
+            "<i class=\"fa fa-shopping-cart\"></i></a><a href='/products/detail' class=\"btn btn-dark btn-buy\">\n" +
             "<i class=\"fa-search fa\"></i><span class=\"btn-buy-label ml-2\">View</span></a>\n" +
             "<a href=\"#\" data-toggle=\"modal\" data-target=\"#exampleModal\" class=\"btn btn-outline-dark btn-product-right\">\n" +
             "<i class=\"fa fa-expand-arrows-alt\"></i></a>\n" +
@@ -34,7 +34,7 @@ class Product {
             "                </div>\n" +
             "                <div class=\"py-2\">\n" +
             "                  <p class=\"text-muted text-sm mb-1\">%s</p>\n" +
-            "                  <h3 class=\"h6 text-uppercase mb-1\"><a href=\"detail.html\" class=\"text-dark\">%s</a></h3><span class=\"text-muted\">%s</span>\n" +
+            "                  <h3 class=\"h6 text-uppercase mb-1\"><a href='/products/detail' class=\"text-dark\">%s</a></h3><span class=\"text-muted\">%s</span>\n" +
             "                </div>\n" +
             "              </div>\n" +
             "            </div>";

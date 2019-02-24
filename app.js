@@ -17,6 +17,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var shopsRouter = require('./routes/shops');
 var productRouter = require('./routes/products');
+var customerRouter = require('./routes/customers');
+var shippingType = require('./routes/shippingTypes');
 
 var app = express();
 var server = app.listen(3000);
@@ -36,6 +38,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/shops', shopsRouter);
 app.use('/products',productRouter);
+app.use('/customers',customerRouter);
+app.use('/shippingType', shippingType);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -82,32 +86,6 @@ io.sockets.on('connection', function (socket) {
     }
 );
 
-io.sockets.on('connection', function (socket) {
-        console.log("Test customer !");
-        socket.on('loadMore', function(value){
-            socket.emit('isLoading', 'visible');
-            //just for test
-            //loading more data
-            value = JSON.parse(value);
-            var c = new Customer("toto");
-            c.getCustomer(value.start,value.number,function (err, rows) {
-                if(err==null) {
-                    retour = "";
-                    for (row of rows) {
-                        retour += c.getCustomerView(row.firstName,row.lastName,row.Address,row.Email,row.Phone);
-                    }
-                    socket.emit('newObjec', retour);
-                    socket.emit('isLoading', "hidden");
-                }else
-                {
-                    console.log(rows);
-                    socket.emit('newObject', "ERROR !!!");
-                    socket.emit('isLoading', "hidden");
-                }
-            });
-        })
-    }
-);
 function onListening() {
     var addr = server.address();
     var bind = typeof addr === 'string'
