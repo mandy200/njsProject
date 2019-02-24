@@ -47,7 +47,7 @@ form.search button {
   font-size: 17px;
   border: 1px solid grey;
   border-left: none;
-    /* Prevent double borders */
+  /* Prevent double borders */
   cursor: pointer;
 }
 
@@ -60,4 +60,21 @@ form.search::after {
   content: "";
   clear: both;
   display: table;
+}
+
+.FloatButton{
+  float: right;
+}
+.complexSearch{
+  margin-top: 20px;
+}
+.complexSearchBTN{
+  visibility: hidden;
+}
+.logo{
+
+}
+.shop {
+  max-width:75px;
+  max-height:75px;
 }
