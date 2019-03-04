@@ -13,7 +13,7 @@
     <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
-<div class="jumbotron text-center" style="margin-bottom:0">
+<div class="text-left" style="margin-bottom:0; height:100px;">
     <h1>PhyGit</h1>
     <p>Project of G6&ZIP</p>
 </div>
@@ -44,7 +44,9 @@
                     Mon compte
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Moi<% if (user) {%>(<%=user.name%>) <%}%></a>
+                    <a class="dropdown-item" href="#">Moi<% if (user) {%>(<%=user.name%>) </a>
+                    <a class="dropdown-item" href="#" id="notificationContainer" ></a>
+                    <%}%>
                     <a class="dropdown-item" href="#">Another action</a>
                     <div class="dropdown-divider"></div>
                     <% if(user){%>
@@ -63,4 +65,17 @@
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>-->
     </div>
+    <script>
+        $.get('/notification/WithClientId/<%= user.id%>',function(data,status) {
+            if(data.length>=0) {
+                var text = 'notification <sup class=\"notification badge\" id=\"notificationbadge\">';
+                $('#notificationContainer').append(text + data.length + "</sup>");
+                $('#notificationContainer').show();
+                console.log(data);
+            }else
+            {
+                $('#notificationContainer').hide();
+            }
+        })
+    </script>
 </nav>
