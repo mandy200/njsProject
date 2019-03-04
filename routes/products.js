@@ -8,9 +8,24 @@ router.get('/', function(req, res, next) {
     res.send('respond with a resource');
 });
 
-/* GET product details page */
+/* details page
 router.get('/detail', function(req, res, next) {
     return res.render('detail', {title: 'PDS', user:{}});
+});*/
+
+/* GET product details */
+router.get('/view/:id', function (req, res, next) {
+    var id = req.params.id;
+    var retour = "";
+    db.product.get(id, function (err, rows) {
+        if (err) {
+            console.log("err", rows);
+        } else {
+
+            console.log(rows);
+            res.render('detail', {title: 'PDS', user: {}, getProduct:rows})
+        }
+    });
 });
 
 /* Search product*/
@@ -40,6 +55,24 @@ router.get('/searchByName/:name', function (req, res, next) {
         }
     });
 
+});
+router.get('/searchByNameLike/',function(req,res,next){
+    if(req.query.q.length <3){
+        res.send("");
+    }else {
+        db.product.searchName(req.query.q, function (err, product) {
+            if (err) {
+                console.log("err", err)
+                return res.json(product)
+
+            } else {
+                console.log("product", product)
+
+                return res.json(product)
+
+            }
+        });
+    }
 });
 
 // Search data by brand
@@ -204,7 +237,7 @@ router.get('/searchByPr/:maxPr', function (req, res, next) {
                 }
                 else {
                     var retour = "";
-                    db.product.getProduct(0, 4, function (err, rows) {
+                    db.product.getProduct(0, 9, function (err, rows) {
                         if (err) {
                             console.log(rows);
                         } else {
@@ -214,7 +247,7 @@ router.get('/searchByPr/:maxPr', function (req, res, next) {
                             for (row of rows) {
                                 compteur++;
                                 var s = new Size(row.weight, row.height, row.width, row.depth);
-                                var produit = new Product(row.Name, row.Description, row.img, row.price, row.barcode, row.brand, row.colour, s);
+                                var produit = new Product(row.Name, row.Description, row.img, row.price, row.barcode, row.brand, row.colour, s,row.categoryProductId,row.id);
                                 retour += produit.getProductView();
                                 if (compteur % 3 === 0) {
                                     retour += "</div><div class='row'>";
