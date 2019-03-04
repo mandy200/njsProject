@@ -1,3 +1,6 @@
+var Size = require('../model/size');
+var Shop = require('../model/shop');
+
 module.exports = (sequelize, DataTypes, Product) => {
     const Op = sequelize.Op
     productModel = sequelize.define('products', {
@@ -39,6 +42,9 @@ module.exports = (sequelize, DataTypes, Product) => {
         depth: {
             type: DataTypes.FLOAT
         },
+        tags:{
+            type:DataTypes.STRING
+        }
     });
     /*productModel.sync({force: true}).then(() => {
         console.log("sync product in progress");
@@ -63,6 +69,8 @@ module.exports = (sequelize, DataTypes, Product) => {
             height: value.height(),
             width: value.width(),
             depth: value.depth(),
+            tags: value.tags,
+            shop: value.shop().toUpperCase(),
         }).then(task => {
             task.setCategoryProduct(value.category);
             callback(task);
@@ -102,13 +110,11 @@ module.exports = (sequelize, DataTypes, Product) => {
     };
 
     productModel.searchName = async function (value, callback) {
-        console.log("value ", value)
+        //console.log("value ", value)
         if (value !== 'undefined') {
             this.findAll({
                 where: {
                     Name: { [Op.iLike]: '%' + value + '%' }
-
-
                 }
             }).then((record) => callback(false, record))
                 .catch((err) => callback(true, err));
@@ -126,7 +132,24 @@ module.exports = (sequelize, DataTypes, Product) => {
                 .catch((err) => callback(true, err));
         }
     };
-
+    productModel.searchByTag = async function(value,last,callback) {
+        if (value !== 'undefined') {
+            this.findAll({
+            }) .then((records) => {
+                var result = [];
+                records.forEach((record) =>{
+                    var listTags = record.tags.split(',');
+                    if(listTags.includes(value))
+                    {
+                        //console.log("OK");
+                        result.push(record);
+                    }
+                });
+                callback(false, result,last);
+            })
+                .catch((err) => callback(true, err,last));
+        }
+    }
     productModel.searchType = async function (value, callback) {
         if (value !== 'undefined') {
             this.findAll({
