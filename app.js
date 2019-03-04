@@ -19,6 +19,8 @@ var shopsRouter = require('./routes/shops');
 var productRouter = require('./routes/products');
 var customerRouter = require('./routes/customers');
 var shippingType = require('./routes/shippingTypes');
+var campagne = require('./routes/campagne');
+var attendanceRouter = require('./routes/attendance');
 
 var app = express();
 var server = app.listen(3000);
@@ -40,6 +42,8 @@ app.use('/shops', shopsRouter);
 app.use('/products',productRouter);
 app.use('/customers',customerRouter);
 app.use('/shippingType', shippingType);
+app.use('/campagne',campagne);
+app.use('/attendance', attendanceRouter);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
